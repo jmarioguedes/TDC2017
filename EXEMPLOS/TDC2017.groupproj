@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{DA77A35C-ED34-4F27-992B-FD2B9FAE5FDA}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="CAMADA REST\RESTServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MICRO SERVIÇO\MicroServico.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RESTServer">
+        <MSBuild Projects="CAMADA REST\RESTServer.dproj"/>
+    </Target>
+    <Target Name="RESTServer:Clean">
+        <MSBuild Projects="CAMADA REST\RESTServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RESTServer:Make">
+        <MSBuild Projects="CAMADA REST\RESTServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MicroServico">
+        <MSBuild Projects="MICRO SERVIÇO\MicroServico.dproj"/>
+    </Target>
+    <Target Name="MicroServico:Clean">
+        <MSBuild Projects="MICRO SERVIÇO\MicroServico.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroServico:Make">
+        <MSBuild Projects="MICRO SERVIÇO\MicroServico.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RESTServer;MicroServico"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RESTServer:Clean;MicroServico:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RESTServer:Make;MicroServico:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
